@@ -9,5 +9,5 @@ public class LoanType
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id {get; set;}
     public string? Name {get; set;}
-    public long Interest {get; set;}
+    public float Interest {get; set;}
 }

@@ -10,7 +10,6 @@ public class LoanTypeResponse
     }
 
     public string Response {get; set;}
-    public string Name {get; set;}
     
     public IEnumerable<LoanType> Results {get; set;}
 }
