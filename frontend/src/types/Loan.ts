@@ -5,5 +5,5 @@ export interface LoanTypeResponse {
 
 export interface LoanType {
   name: string;
-  interestRate: number;
+  interest: number;
 }

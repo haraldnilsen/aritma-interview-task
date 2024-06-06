@@ -42,9 +42,9 @@ const LoanCalculator: React.FC = () => {
             id="loantype"
             className="border border-gray-300 hover:border-gray-400 rounded-md px-3 py-2"
           >
-            {loanTypes.map((loantype) => (
-              <option>
-                {loantype.name} ({loantype.interestRate} % interest)
+            {loanTypes.map((loantype, index) => (
+              <option key={index}>
+                {loantype.name} ({loantype.interest} % interest)
               </option>
             ))}
           </select>
