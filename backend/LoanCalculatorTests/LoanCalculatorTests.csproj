@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <Using Include="Xunit" />
+    <ProjectReference Include="../LoanCalculator/LoanCalculator.csproj"/>
   </ItemGroup>
 
 </Project>
