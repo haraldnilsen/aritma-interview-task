@@ -49,6 +49,8 @@ const LoanCalculator: React.FC = () => {
     if (response) {
       setLoanPayments(response.results);
 
+      await new Promise((r) => setTimeout(r, 200));
+
       const loanPaymentsNode = loanPaymentsRef.current;
 
       loanPaymentsNode?.scrollIntoView({
