@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace LoanCalculator.Controllers;
+namespace backend;
 
 [ApiController]
 [Route("[controller]")]

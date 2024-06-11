@@ -1,4 +1,4 @@
-namespace LoanCalculator;
+namespace backend;
 
 public class WeatherForecast
 {

@@ -1,8 +1,7 @@
-using LoanCalculator.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LoanCalculator.Controllers;
-using static LoanCalculator.PaymentCalculator;
+namespace backend;
+using static backend.PaymentCalculator;
 
 [ApiController]
 [Route("[controller]")]

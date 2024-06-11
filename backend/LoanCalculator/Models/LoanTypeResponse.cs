@@ -1,6 +1,6 @@
 #nullable disable
 
-namespace LoanCalculator.Models;
+namespace backend;
 
 public class LoanTypeResponse
 {

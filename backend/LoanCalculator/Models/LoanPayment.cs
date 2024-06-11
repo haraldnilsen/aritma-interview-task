@@ -1,4 +1,4 @@
-namespace LoanCalculator.Models;
+namespace backend;
 
 public class LoanPayment
 {
@@ -7,4 +7,4 @@ public class LoanPayment
     public decimal InterestPayment { get; set; }
     public decimal TotalPayment { get; set; }
     public decimal RemainingPrincipal { get; set; }
-}
+} 

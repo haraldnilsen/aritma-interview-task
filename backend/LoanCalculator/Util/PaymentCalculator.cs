@@ -1,6 +1,4 @@
-using LoanCalculator.Models;
-
-namespace LoanCalculator;
+namespace backend;
 
 public static class PaymentCalculator 
 {
@@ -25,6 +23,8 @@ public static class PaymentCalculator
             totalPayment = Math.Round(totalPayment, 2);
             remainingPrincipal = Math.Round(remainingPrincipal, 2);
 
+            remainingPrincipal -= principalPayment;
+
             monthlyPlan.Add(new LoanPayment
             {
                 Month = month,
@@ -34,7 +34,7 @@ public static class PaymentCalculator
                 RemainingPrincipal = remainingPrincipal
             });
 
-            remainingPrincipal -= principalPayment;
+            
         }
 
         return monthlyPlan;

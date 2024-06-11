@@ -1,4 +1,4 @@
-using LoanCalculator.Models;
+using backend;
 using Microsoft.EntityFrameworkCore;
 
 public class LoanDbContext: DbContext
