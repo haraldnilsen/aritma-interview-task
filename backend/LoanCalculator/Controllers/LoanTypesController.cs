@@ -1,16 +1,16 @@
 using LoanCalculator.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace backend;
+namespace LoanCalculator.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class LoanController: ControllerBase
+public class LoanTypesController: ControllerBase
 {
     private readonly LoanDbContext _context;
-    private readonly ILogger<LoanController> _logger;
+    private readonly ILogger<LoanTypesController> _logger;
 
-    public LoanController(ILogger<LoanController> logger, LoanDbContext context)
+    public LoanTypesController(ILogger<LoanTypesController> logger, LoanDbContext context)
     {
         _logger = logger;
         _context = context;
