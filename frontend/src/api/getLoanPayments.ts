@@ -1,7 +1,11 @@
-import { LoanTypeResponse } from "../types/Loan";
+import { LoanPaymentResponse } from "../types/Loan";
 
-export const getLoanTypes = async (): Promise<LoanTypeResponse> => {
-  const url = `https://localhost:7213/loantypes`;
+export const getLoanPayments = async (
+  amount: number,
+  years: number,
+  interest: number
+): Promise<LoanPaymentResponse> => {
+  const url = `https://localhost:7213/loanpayment?amount=${amount}&years=${years}&interest=${interest}`;
 
   try {
     const response = await fetch(url, {
@@ -22,4 +26,4 @@ export const getLoanTypes = async (): Promise<LoanTypeResponse> => {
   }
 };
 
-export default getLoanTypes;
+export default getLoanPayments;
