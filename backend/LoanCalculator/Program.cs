@@ -1,9 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
+using CsvHelper;
+using CsvHelper.Configuration;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using LoanCalculator;
+using LoanCalculator.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +37,27 @@ var configuration = builder.Configuration;
 builder.Services.AddDbContext<LoanDbContext>(options =>
     options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
+var services = builder.Services.BuildServiceProvider();
+
+using (var scope = services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<LoanDbContext>();
+    context.Database.EnsureDeleted();
+    context.Database.Migrate();
+
+    if (!context.LoanTypes.Any()) {
+        using (var reader = new StreamReader("public/DbMockData.csv"))
+        using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
+        {
+            TrimOptions = TrimOptions.Trim, // This line trims whitespace from headers
+        }))
+        {
+            var records = csv.GetRecords<LoanType>().ToList();
+            context.LoanTypes.AddRange(records);
+            context.SaveChanges();
+        }
+    }
+}
 
 var app = builder.Build();
 
