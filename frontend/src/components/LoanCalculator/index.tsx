@@ -11,6 +11,7 @@ import getLoanTypes from "../../api/getLoanTypes";
 import getLoanPayments from "../../api/getLoanPayments";
 import ResetSVG from "../../assets/svgs/ResetSVG";
 import FormButton from "../FormButton";
+import LoanTable from "../LoanTable";
 
 const LoanCalculator: React.FC = () => {
   const [loanAmount, setLoanAmount] = useState<number>(0);
@@ -49,6 +50,7 @@ const LoanCalculator: React.FC = () => {
     if (response) {
       setLoanPayments(response.results);
 
+      // wait before scrolling
       await new Promise((r) => setTimeout(r, 200));
 
       const loanPaymentsNode = loanPaymentsRef.current;
@@ -63,6 +65,7 @@ const LoanCalculator: React.FC = () => {
 
   return (
     <div className="w-full bg-bkg flex flex-col items-center text-left">
+      {/* LOAN FORM */}
       <form
         onSubmit={(e: SyntheticEvent) => {
           e.preventDefault();
@@ -112,52 +115,14 @@ const LoanCalculator: React.FC = () => {
           <FormButton label="Calculate" />
         </div>
       </form>
+
+      {/* LOAN TABLE */}
       {loanPayments.length > 0 && (
         <div
           ref={loanPaymentsRef}
           className="border-2 border-gray-200 hover:border-gray-300 rounded-lg  m-4"
         >
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-bkg">
-              <tr>
-                {[
-                  "Month",
-                  "Principal Payment",
-                  "Interest Payment",
-                  "Total Payment",
-                  "Remaining Principal",
-                ].map((item) => (
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-xs font-bold text-content uppercase tracking-wider"
-                  >
-                    {item}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {loanPayments.map((payment) => (
-                <tr key={payment.month}>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {payment.month}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {payment.principalPayment}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {payment.interestPayment}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {payment.totalPayment}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {payment.remainingPrincipal}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <LoanTable loanPayments={loanPayments} />
         </div>
       )}
     </div>
