@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useEffect, useState } from "react";
+import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
 import "./styles.css";
 import NumberInput from "../NumberInput";
 import {
@@ -19,6 +19,8 @@ const LoanCalculator: React.FC = () => {
 
   const [loanTypes, setLoanTypes] = useState<LoanType[]>([]);
   const [loanPayments, setLoanPayments] = useState<LoanPayment[]>([]);
+
+  const loanPaymentsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchLoanTypes = async () => {
@@ -46,6 +48,14 @@ const LoanCalculator: React.FC = () => {
 
     if (response) {
       setLoanPayments(response.results);
+
+      const loanPaymentsNode = loanPaymentsRef.current;
+
+      loanPaymentsNode?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
+      });
     }
   };
 
@@ -101,7 +111,10 @@ const LoanCalculator: React.FC = () => {
         </div>
       </form>
       {loanPayments.length > 0 && (
-        <div className="border-2 border-gray-200 hover:border-gray-300 rounded-lg  m-4">
+        <div
+          ref={loanPaymentsRef}
+          className="border-2 border-gray-200 hover:border-gray-300 rounded-lg  m-4"
+        >
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-bkg">
               <tr>

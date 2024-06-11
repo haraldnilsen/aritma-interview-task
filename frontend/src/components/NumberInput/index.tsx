@@ -18,6 +18,10 @@ const NumberInput: React.FC<NumberInputProps> = ({
     onChange(newValue);
   };
 
+  const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+    event.target.select();
+  };
+
   return (
     <>
       <label htmlFor={id}>{label}</label>
@@ -26,6 +30,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
         type="number"
         value={value}
         onChange={handleChange}
+        onFocus={handleFocus}
         className="border text-content border-gray-300 hover:border-secondary rounded-md px-3 py-2"
       />
     </>
