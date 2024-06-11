@@ -1,4 +1,4 @@
-# Aritma Interview Task
+<h1 align="center" >Aritma Interview Task</h1>
 
 
 ## About
