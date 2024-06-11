@@ -9,6 +9,8 @@ import {
 } from "../../types/Loan";
 import getLoanTypes from "../../api/getLoanTypes";
 import getLoanPayments from "../../api/getLoanPayments";
+import ResetSVG from "../../assets/svgs/ResetSVG";
+import FormButton from "../FormButton";
 
 const LoanCalculator: React.FC = () => {
   const [loanAmount, setLoanAmount] = useState<number>(0);
@@ -48,7 +50,7 @@ const LoanCalculator: React.FC = () => {
   };
 
   return (
-    <div className="w-full flex flex-col items-center">
+    <div className="w-full bg-bkg flex flex-col items-center text-left">
       <form
         onSubmit={(e: SyntheticEvent) => {
           e.preventDefault();
@@ -56,8 +58,18 @@ const LoanCalculator: React.FC = () => {
             onCalculateSubmit(loanAmount, paybackTime, interestRate);
           }
         }}
-        className="form grid grid-flow-row gap-3 border-2 border-gray-200 hover:border-gray-300 rounded-lg p-6 m-4"
+        className="form relative bg-content text-secondary font-medium grid grid-flow-row gap-5 rounded-xl pb-7 pt-9 px-6 my-12"
       >
+        <div
+          onClick={() => {
+            setLoanAmount(0);
+            setPaybackTime(1);
+            setLoanPayments([]);
+          }}
+          className="absolute right-8 top-5 hover:cursor-pointer hover:animate-spin360"
+        >
+          <ResetSVG width={30} fill="secondary" />
+        </div>
         <NumberInput
           id="loanamount"
           label="Loan Amount (NOK)"
@@ -74,7 +86,7 @@ const LoanCalculator: React.FC = () => {
         {loanTypes && (
           <select
             id="loantype"
-            className="border border-gray-300 hover:border-gray-400 rounded-md px-3 py-2"
+            className="border text-content border-gray-300 hover:border-secondary rounded-md px-3 py-2"
             onChange={(e) => setInterestRate(Number(e.target.value))}
           >
             {loanTypes.map((loantype, index) => (
@@ -84,69 +96,29 @@ const LoanCalculator: React.FC = () => {
             ))}
           </select>
         )}
-        <div className="w-full flex justify-around">
-          <div
-            onClick={() => {
-              setLoanAmount(0);
-              setPaybackTime(1);
-            }}
-            className="button my-2 border border-gray-500"
-          >
-            Clear
-          </div>
-          <button className="button my-2 border border-gray-500">
-            Calculate
-          </button>
+        <div className="w-full flex justify-center my-5">
+          <FormButton label="Calculate" />
         </div>
       </form>
-      {/* {loanPayments && (
-        <div className="border-2 border-gray-200 hover:border-gray-300 rounded-lg p-6 m-4">
-          {loanPayments.map((payment) => (
-            <div>
-              <p>Month: {payment.month}</p>
-              <p>Principal Payment: {payment.principalpayment}</p>
-              <p>Interest Payment: {payment.interestpayment}</p>
-              <p>Total Payment: {payment.totalpayment}</p>
-              <p>Remaining Payment: {payment.remainingprincipal}</p>
-            </div>
-          ))}
-        </div>
-      )} */}
-      {loanPayments && (
+      {loanPayments.length > 0 && (
         <div className="border-2 border-gray-200 hover:border-gray-300 rounded-lg  m-4">
           <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
+            <thead className="bg-bkg">
               <tr>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Month
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Principal Payment
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Interest Payment
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Total Payment
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Remaining Principal
-                </th>
+                {[
+                  "Month",
+                  "Principal Payment",
+                  "Interest Payment",
+                  "Total Payment",
+                  "Remaining Principal",
+                ].map((item) => (
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-xs font-bold text-content uppercase tracking-wider"
+                  >
+                    {item}
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
