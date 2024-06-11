@@ -2,8 +2,8 @@
 cd backend
 docker-compose up -d
 
-cd cinemateket
-dotnet run &
+cd LoanCalculator
+dotnet run --launch-profile https &
 
 cd ../..
 
