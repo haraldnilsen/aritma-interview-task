@@ -2,11 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using CsvHelper;
 using CsvHelper.Configuration;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using LoanCalculator;
-using LoanCalculator.Models;
+using backend;
 
 var builder = WebApplication.CreateBuilder(args);
 
