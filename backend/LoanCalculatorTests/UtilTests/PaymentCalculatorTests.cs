@@ -7,12 +7,12 @@ namespace LoanCalculator
     public class PaymentCalculatorTests
     {
         [Fact]
-        public void GenerateMonthlyPaybackPlan_ShouldCalculateCorrectMonthlyPayments_WithInterest()
+        public void CalculateCorrectPayment_With_Interest()
         {
             // Arrange
             decimal loanAmount = 10000m;
             int years = 1;
-            decimal annualInterestRate = 12m; // 12% annual interest rate
+            decimal annualInterestRate = 12;
             int totalMonths = years * 12;
 
             // Act
@@ -25,12 +25,12 @@ namespace LoanCalculator
         }
 
         [Fact]
-        public void GenerateMonthlyPaybackPlan_ShouldCalculateCorrectMonthlyPayments_WithoutInterest()
+        public void CalculateCorrectPayment_WithOut_Interest()
         {
             // Arrange
             decimal loanAmount = 12000m;
             int years = 1;
-            decimal annualInterestRate = 0m; // 0% annual interest rate
+            decimal annualInterestRate = 0m;
             int totalMonths = years * 12;
 
             // Act
