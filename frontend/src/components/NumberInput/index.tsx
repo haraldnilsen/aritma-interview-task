@@ -26,7 +26,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
         type="number"
         value={value}
         onChange={handleChange}
-        className="border border-gray-300 hover:border-gray-400 rounded-md px-3 py-2"
+        className="border text-content border-gray-300 hover:border-secondary rounded-md px-3 py-2"
       />
     </>
   );
