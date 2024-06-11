@@ -9,3 +9,10 @@
 3. Run the following commands:
    - `cd aritma-interview-task`
    - `bash local.sh`
+
+## How to run tests
+1. Move into the test directory:
+   - `cd backend`
+   - `cd LoanCalculatorTests`
+2. Execute the tests
+   - `dotnet test`
